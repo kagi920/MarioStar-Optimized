@@ -1,0 +1,39 @@
+#include <metal_stdlib>
+#include <realitykit/realitykit.h>
+
+using namespace metal;
+
+// 1. 形状をブロック化する (Geometry Modifier)
+[[visible]]
+void voxelizeGeometry(realitykit::geometry_parameters params)
+{
+    // ブロックの大きさ (0.1 = 10cm)
+    // ここを変えるとドットの粗さが変わります
+    float gridSize = 0.1;
+    
+    float3 originalPos = params.geometry().model_position();
+    
+    // 座標をグリッドに丸める計算
+    float3 snappedPos = floor(originalPos / gridSize) * gridSize;
+    
+    params.geometry().set_model_position(snappedPos);
+}
+
+// 2. 表面をレトロゲーム風にする (Surface Shader)
+[[visible]]
+void retroSurface(realitykit::surface_parameters params)
+{
+    // ポリゴンごとの法線を再計算 (カクカクした陰影にする)
+    float3 viewPos = params.geometry().view_position();
+    float3 flatNormal = normalize(cross(dfdx(viewPos), dfdy(viewPos)));
+    params.surface().set_normal(flatNormal);
+    
+    // 色: マトリックス風のデジタルグリーン
+    // 高さ(Y)に応じて縞模様を入れる
+    float y = params.geometry().model_position().y;
+    float3 color = float3(0.0, 1.0, 0.2) * (0.5 + 0.5 * sin(y * 20.0));
+    
+    params.surface().set_base_color(half3(color));
+    params.surface().set_emissive_color(half3(color * 0.5)); // 少し光らせる
+    params.surface().set_roughness(1.0); // ツヤ消し
+}

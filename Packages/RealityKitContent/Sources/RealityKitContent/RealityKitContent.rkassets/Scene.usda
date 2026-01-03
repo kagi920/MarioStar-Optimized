@@ -1,0 +1,214 @@
+#usda 1.0
+(
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["GridMaterial", "SuperStarMaterial", "Sphere"]
+    rel material:binding = None (
+        bindMaterialAs = "weakerThanDescendants"
+    )
+
+    def Sphere "Sphere" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/GridMaterial/GridMaterial> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double radius = 0.05
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, 0.0004)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.2, 0.2, 0.2)
+                float radius = 0.05
+                token shapeType = "Sphere"
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+    }
+
+    def "GridMaterial" (
+        active = true
+        references = @Materials/GridMaterial.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def Material "SuperStarMaterial"
+    {
+        float inputs:Intensity = 0 (
+            customData = {
+                dictionary realitykit = {
+                    float2 positionInSubgraph = (355.64844, 292.1211)
+                    int stackingOrderInSubgraph = 199
+                }
+            }
+        )
+        token outputs:mtlx:surface.connect = </Root/SuperStarMaterial/UnlitSurface.outputs:out>
+        token outputs:realitykit:vertex
+        float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (1403.25, 256.19922)
+        int ui:nodegraph:realitykit:subgraphOutputs:stackingOrder = 10
+
+        def Shader "UnlitSurface"
+        {
+            uniform token info:id = "ND_realitykit_unlit_surfaceshader"
+            bool inputs:applyPostProcessToneMap
+            color3f inputs:color.connect = </Root/SuperStarMaterial/Add_1.outputs:out>
+            bool inputs:hasPremultipliedAlpha
+            float inputs:opacity
+            float inputs:opacityThreshold
+            token outputs:out
+            float2 ui:nodegraph:node:pos = (985.5781, 391.90625)
+            int ui:nodegraph:node:stackingOrder = 184
+        }
+
+        def Shader "Time"
+        {
+            uniform token info:id = "ND_time_float"
+            float outputs:out
+            float2 ui:nodegraph:node:pos = (152.01172, 134.28906)
+            int ui:nodegraph:node:stackingOrder = 96
+        }
+
+        def Shader "HSVToRGB"
+        {
+            uniform token info:id = "ND_hsvtorgb_color3"
+            color3f inputs:in.connect = </Root/SuperStarMaterial/Combine3.outputs:out>
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (534.6328, 165.92188)
+            int ui:nodegraph:node:stackingOrder = 82
+        }
+
+        def Shader "Combine3"
+        {
+            uniform token info:id = "ND_combine3_color3"
+            float inputs:in1.connect = </Root/SuperStarMaterial/Time.outputs:out>
+            float inputs:in2 = 1
+            float inputs:in3 = 1
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (333.08984, 158.39453)
+            int ui:nodegraph:node:stackingOrder = 101
+            string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["inputs:in3"]
+        }
+
+        def Shader "Image"
+        {
+            uniform token info:id = "ND_image_color3"
+            asset inputs:file = @Materials/マリオ.jpg@
+            string inputs:filtertype
+            float2 inputs:texcoord
+            string inputs:uaddressmode
+            string inputs:vaddressmode
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (-66.0625, 354.07812)
+            int ui:nodegraph:node:stackingOrder = 163
+            string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["inputs:file"]
+        }
+
+        def Shader "Multiply"
+        {
+            uniform token info:id = "ND_multiply_color3"
+            color3f inputs:in1.connect = </Root/SuperStarMaterial/Combine3_1.outputs:out>
+            color3f inputs:in2.connect = </Root/SuperStarMaterial/HSVToRGB.outputs:out>
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (730.6289, 171.08203)
+            int ui:nodegraph:node:stackingOrder = 158
+        }
+
+        def Shader "Add_1"
+        {
+            uniform token info:id = "ND_add_color3"
+            color3f inputs:in1.connect = </Root/SuperStarMaterial/Multiply.outputs:out>
+            color3f inputs:in2.connect = </Root/SuperStarMaterial/Image.outputs:out>
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (874.71094, 179.30078)
+            int ui:nodegraph:node:stackingOrder = 182
+        }
+
+        def Shader "Combine3_1"
+        {
+            uniform token info:id = "ND_combine3_color3"
+            float inputs:in1.connect = </Root/SuperStarMaterial.inputs:Intensity>
+            float inputs:in2.connect = </Root/SuperStarMaterial.inputs:Intensity>
+            float inputs:in3.connect = </Root/SuperStarMaterial.inputs:Intensity>
+            color3f outputs:out
+            float2 ui:nodegraph:node:pos = (581.2617, 317.48047)
+            int ui:nodegraph:node:stackingOrder = 201
+        }
+    }
+
+    def Cube "Cube" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/SuperStarMaterial> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double size = 0.2
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:mtlx:surface.connect = </Root/Cube/DefaultMaterial/PreviewSurface.outputs:out>
+            token outputs:realitykit:vertex
+            token outputs:surface.connect = </Root/Cube/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+            float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (0, 110.5)
+
+            def Shader "DefaultSurfaceShader" (
+                active = false
+            )
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+
+            def Shader "PreviewSurface"
+            {
+                uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
+                token outputs:out
+                float2 ui:nodegraph:node:pos = (-255, 105)
+            }
+        }
+    }
+
+    def Xform "DirectionalLight"
+    {
+        def RealityKitComponent "DirectionalLight"
+        {
+            token info:id = "RealityKit.DirectionalLight"
+
+            def RealityKitStruct "Shadow"
+            {
+            }
+        }
+    }
+}
+
