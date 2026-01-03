@@ -12,18 +12,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1614EAF22F033E2C002F7357 /* EightBitReality.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EightBitReality.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1614EAF22F033E2C002F7357 /* MarioStar-Optimized.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MarioStar-Optimized.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1614EAF62F033E2C002F7357 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		1614EB0C2F03B91C002F7357 /* ImmersiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		1614EB002F033E2F002F7357 /* Exceptions for "EightBitReality" folder in "EightBitReality" target */ = {
+		1614EB002F033E2F002F7357 /* Exceptions for "EightBitReality" folder in "MarioStar-Optimized" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 1614EAF12F033E2C002F7357 /* EightBitReality */;
+			target = 1614EAF12F033E2C002F7357 /* MarioStar-Optimized */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -31,7 +31,7 @@
 		1614EAF42F033E2C002F7357 /* EightBitReality */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				1614EB002F033E2F002F7357 /* Exceptions for "EightBitReality" folder in "EightBitReality" target */,
+				1614EB002F033E2F002F7357 /* Exceptions for "EightBitReality" folder in "MarioStar-Optimized" target */,
 			);
 			path = EightBitReality;
 			sourceTree = "<group>";
@@ -63,7 +63,7 @@
 		1614EAF32F033E2C002F7357 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1614EAF22F033E2C002F7357 /* EightBitReality.app */,
+				1614EAF22F033E2C002F7357 /* MarioStar-Optimized.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -79,9 +79,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1614EAF12F033E2C002F7357 /* EightBitReality */ = {
+		1614EAF12F033E2C002F7357 /* MarioStar-Optimized */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1614EB012F033E2F002F7357 /* Build configuration list for PBXNativeTarget "EightBitReality" */;
+			buildConfigurationList = 1614EB012F033E2F002F7357 /* Build configuration list for PBXNativeTarget "MarioStar-Optimized" */;
 			buildPhases = (
 				1614EAEE2F033E2C002F7357 /* Sources */,
 				1614EAEF2F033E2C002F7357 /* Frameworks */,
@@ -94,12 +94,12 @@
 			fileSystemSynchronizedGroups = (
 				1614EAF42F033E2C002F7357 /* EightBitReality */,
 			);
-			name = EightBitReality;
+			name = "MarioStar-Optimized";
 			packageProductDependencies = (
 				1614EAF72F033E2C002F7357 /* RealityKitContent */,
 			);
 			productName = EightBitReality;
-			productReference = 1614EAF22F033E2C002F7357 /* EightBitReality.app */;
+			productReference = 1614EAF22F033E2C002F7357 /* MarioStar-Optimized.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -117,7 +117,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1614EAED2F033E2C002F7357 /* Build configuration list for PBXProject "EightBitReality" */;
+			buildConfigurationList = 1614EAED2F033E2C002F7357 /* Build configuration list for PBXProject "MarioStar-Optimized" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -131,7 +131,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1614EAF12F033E2C002F7357 /* EightBitReality */,
+				1614EAF12F033E2C002F7357 /* MarioStar-Optimized */,
 			);
 		};
 /* End PBXProject section */
@@ -168,17 +168,18 @@
 				DEVELOPMENT_TEAM = WMJFN63S5Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				INFOPLIST_FILE = EightBitReality/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
-				INFOPLIST_KEY_NSWorldSensingUsageDescription = "部屋を8ビット化するために使用します";
+				INFOPLIST_KEY_NSHandsTrackingUsageDescription = HandInteraction;
+				INFOPLIST_KEY_NSWorldSensingUsageDescription = WorldSensing;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kagiyama.EightBitReality;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kagi920.MarioOptimized;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "xros xrsimulator";
@@ -201,17 +202,18 @@
 				DEVELOPMENT_TEAM = WMJFN63S5Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				INFOPLIST_FILE = EightBitReality/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
-				INFOPLIST_KEY_NSWorldSensingUsageDescription = "部屋を8ビット化するために使用します";
+				INFOPLIST_KEY_NSHandsTrackingUsageDescription = HandInteraction;
+				INFOPLIST_KEY_NSWorldSensingUsageDescription = WorldSensing;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kagiyama.EightBitReality;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kagi920.MarioOptimized;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "xros xrsimulator";
@@ -348,7 +350,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1614EAED2F033E2C002F7357 /* Build configuration list for PBXProject "EightBitReality" */ = {
+		1614EAED2F033E2C002F7357 /* Build configuration list for PBXProject "MarioStar-Optimized" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1614EB042F033E2F002F7357 /* Debug */,
@@ -357,7 +359,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1614EB012F033E2F002F7357 /* Build configuration list for PBXNativeTarget "EightBitReality" */ = {
+		1614EB012F033E2F002F7357 /* Build configuration list for PBXNativeTarget "MarioStar-Optimized" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1614EB022F033E2F002F7357 /* Debug */,
